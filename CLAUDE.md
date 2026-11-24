@@ -52,7 +52,9 @@ No server: on submit, `js/main.js` builds a WhatsApp message from the fields and
 
 ## Tracking
 
-None yet: no Google Tag Manager, GA4, cookie banner or booking widget. When tracking is added, put GTM in `<head>` wrapped in `<!-- Google Tag Manager -->` … `<!-- End Google Tag Manager -->` (and the noscript in matching comments) so the staging script can strip it, add a cookie notice, and update the privacy policy's "Cookies and tracking" section.
+- **Google Tag Manager `GTM-WZKJT6NR`** (added 2026-11-24) on all three pages: in `<head>` between `<!-- Google Tag Manager -->` … `<!-- End Google Tag Manager -->`, and the noscript right after `<body>` in matching comments, so the staging script strips both (staging sends no data to GTM).
+- The head block sets **Google Consent Mode** to denied by default and re-grants it for returning visitors who accepted. `js/consent.js` shows the cookie notice (Accept / No thanks), stores the choice in `localStorage` (`cb-cookies`) and sends the consent update plus a `cookie_consent_granted` dataLayer event. Tags inside GTM (GA4, Meta pixel, etc.) are set up in the GTM web console, not in this repo; non-Google tags should be set to require consent there.
+- The privacy policy's "Cookies and tracking" section describes this; update it if what GTM loads changes in kind.
 
 ## Gotchas
 

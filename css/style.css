@@ -765,3 +765,19 @@ input, select, textarea { font: inherit; color: inherit; }
   .squiggle path { stroke-dashoffset: 0 !important; }
   .marquee__track { animation: none; }
 }
+
+/* ── COOKIE NOTICE (js/consent.js) ── */
+.cookie-notice {
+  position: fixed; left: 24px; bottom: 24px; z-index: 95;
+  max-width: 420px; padding: 18px 20px;
+  background: var(--cream); color: var(--text);
+  border: 1.5px dashed var(--driftwood); border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  font-size: 14px; line-height: 1.5;
+}
+.cookie-notice a { color: var(--clay-dark); text-decoration: underline; }
+.cookie-notice__actions { display: flex; gap: 10px; margin-top: 12px; }
+@media (max-width: 700px) {
+  .cookie-notice { left: 12px; right: 12px; bottom: 12px; max-width: none; }
+  .cookie-notice__actions .btn { flex: 1; justify-content: center; }
+}
