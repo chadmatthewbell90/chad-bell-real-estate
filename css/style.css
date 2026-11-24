@@ -746,8 +746,9 @@ input, select, textarea { font: inherit; color: inherit; }
   .pills { justify-content: center; }
   .faq__item summary { font-size: 19px; }
   .faq__answer { padding-right: 0; }
-  .form { padding: 80px 20px 28px; border-radius: 160px 160px var(--radius-lg) var(--radius-lg); }
-  .form h3 { font-size: 27px; }
+  .form { padding: 76px 20px 28px; border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / 96px 96px var(--radius-lg) var(--radius-lg); }
+  .form h3 { font-size: 25px; }
+  .form__intro { text-wrap: balance; }
   .form__row { grid-template-columns: 1fr; gap: 0; }
   .valuation__info { text-align: left; order: -1; }
   .valuation__info .eyebrow { justify-content: flex-start; }
