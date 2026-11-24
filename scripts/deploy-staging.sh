@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 # Publish the current working copy to the staging site:
-#   https://chadmatthewbell90.github.io/chad-bell-real-estate-staging/
+#   https://staging.chadbellrealestate.co.za
 #   (repo: github.com/chadmatthewbell90/chad-bell-real-estate-staging,
 #    GitHub Pages on, deploying from the main branch root)
 #
@@ -9,7 +9,7 @@
 #   - Google Tag Manager snippets removed, if any are ever added
 #   - noindex meta + robots.txt (kept out of Google)
 #   - "Staging preview" badge on every page
-#   - no CNAME; 404.html <base href> pointed at the staging path
+#   - CNAME set to the staging domain; 404.html <base href> set to /
 #
 # Usage (from the repo root):  scripts/deploy-staging.sh
 # ============================================================
@@ -18,7 +18,8 @@ set -euo pipefail
 STAGING_OWNER="chadmatthewbell90"
 STAGING_NAME="chad-bell-real-estate-staging"
 STAGING_REPO="https://github.com/${STAGING_OWNER}/${STAGING_NAME}.git"
-STAGING_URL="https://${STAGING_OWNER}.github.io/${STAGING_NAME}/"
+STAGING_DOMAIN="staging.chadbellrealestate.co.za"
+STAGING_URL="https://${STAGING_DOMAIN}/"
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD="$(mktemp -d)"
@@ -33,9 +34,10 @@ fi
 # Copy the site (everything except git data, scripts and any live CNAME)
 rsync -a --exclude '.git' --exclude 'scripts' --exclude 'CNAME' "$ROOT/" "$BUILD/"
 
+echo "$STAGING_DOMAIN" > "$BUILD/CNAME"
 printf 'User-agent: *\nDisallow: /\n' > "$BUILD/robots.txt"
 
-python3 - "$BUILD" "/${STAGING_NAME}/" <<'EOF'
+python3 - "$BUILD" "/" <<'EOF'
 import pathlib, re, sys
 build, base_path = pathlib.Path(sys.argv[1]), sys.argv[2]
 

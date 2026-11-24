@@ -6,11 +6,11 @@ Live at https://chadmatthewbell90.github.io/chad-bell-real-estate/ (no custom do
 
 ## Workflow
 
-- **Default: commit and push every finished, verified change to `main` without asking.** GitHub Pages publishes it in about a minute. Keep each change in its own commit so it can be reverted on its own. Don't build preview pages unless asked.
-- **Staging:** when asked to "put it on staging", "preview" or "show me first", make the change, run `scripts/deploy-staging.sh`, and send the staging URL it prints. Push to `main` only after they say "push it live". The staging repo (`chadmatthewbell90/chad-bell-real-estate-staging`) has to exist with Pages switched on before the script works; it tells you if it doesn't.
-- **Undo:** "revert the last change" means `git revert` the relevant commit and push.
-- `git pull` before making changes; more than one person pushes to this repo.
-- The repo belongs to **chadmatthewbell90**; Cameron (`cameronferreira`) is a collaborator with push access but not admin, so Pages, domain and repo settings have to be changed from Chad's account.
+- **Staging first, always (owner's rule, 2026-11-24).** Make the change, commit it locally on `main`, run `scripts/deploy-staging.sh`, and send https://staging.chadbellrealestate.co.za for review. **Do not `git push` to `origin main` (which publishes the live site) until Chad explicitly says to publish live** ("push it live", "publish", "go live"). Approval covers the changes he has seen on staging, not later ones.
+- Approved commits are pushed together; `git log origin/main..main` lists what is waiting for approval. Keep each change in its own commit so it can be reverted on its own.
+- **Undo:** "revert the last change" means `git revert` the relevant commit, redeploy staging, and push only once approved (or straight away if the change being undone is already live and Chad asks for that).
+- `git pull --rebase` before making changes; Cameron (`cameronferreira`, collaborator) also pushes to this repo.
+- The repos belong to **chadmatthewbell90** (this Mac is signed in to GitHub as that account, with admin rights). Commits from this Mac use "Chad Bell" with the account's GitHub no-reply address (set in this repo's git config).
 
 ## Copy voice
 
@@ -41,13 +41,13 @@ No server: on submit, `js/main.js` builds a WhatsApp message from the fields and
 - Facebook https://www.facebook.com/Chadbellacuttsbluff
 - PPRA FFC 1157352 (in the footer; property practitioners must show it)
 
-## Connecting a custom domain later
+## Domain, hosting and DNS
 
-1. Add a `CNAME` file containing the domain (e.g. `www.example.co.za`) and push.
-2. In Chad's account: repo Settings → Pages → Custom domain, then tick Enforce HTTPS once the certificate is issued.
-3. DNS: `www` CNAME → `chadmatthewbell90.github.io`; apex A records → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153.
-4. Find and replace `https://chadmatthewbell90.github.io/chad-bell-real-estate/` with the new address (canonical, Open Graph, JSON-LD, `robots.txt`, `sitemap.xml`), and change the `<base href>` in `404.html` to `/`.
-5. Note that `chadbellrealestate.co.za` already exists as an older site; check who controls it before choosing a domain.
+- **Domain:** chadbellrealestate.co.za, registered and DNS-hosted at **domains.co.za** (nameservers ns1–ns4.tld-ns.*). Chad edits DNS himself in the domains.co.za client area; never ask for or enter his login. No email runs on this domain (Chad's email is @acutts.co.za), so there are no MX records to protect.
+- **Live (planned):** `www.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate`; the bare domain redirects to www. Until the switch, the live site is https://chadmatthewbell90.github.io/chad-bell-real-estate/ and www still shows Chad's old Google Sites page.
+- **Staging:** `staging.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate-staging` (custom domain already set there). Published only by `scripts/deploy-staging.sh`, which adds noindex, a "Staging preview" badge and the staging CNAME.
+- **DNS records needed at domains.co.za:** A `@` → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` → `chadmatthewbell90.github.io`; CNAME `staging` → `chadmatthewbell90.github.io`. Remove the old A record 169.239.219.58, the web forwarding on the bare domain, and the www CNAME to ghs.googlehosted.com.
+- **Live switch (after DNS):** the branch `live-domain` holds it: `CNAME` = `www.chadbellrealestate.co.za`; canonical, Open Graph, JSON-LD, `robots.txt` and `sitemap.xml` use `https://www.chadbellrealestate.co.za/`; `404.html` `<base href>` = `/`. Merge and push only with Chad's go-ahead, then tick Enforce HTTPS in both repos once GitHub has issued the certificates.
 
 ## Tracking
 
