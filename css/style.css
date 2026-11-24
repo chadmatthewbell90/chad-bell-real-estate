@@ -269,6 +269,11 @@ input, select, textarea { font: inherit; color: inherit; }
   font-family: var(--font-hand); font-size: 26px; color: #8A5A40; opacity: .8;
 }
 /* Acutts SOLD board planted in the sand; the SOLD strip stamps on once */
+/* Cartoon Chad waves; the Acutts feather flag sways in the breeze */
+.beach__wave-arm { transform-box: view-box; transform-origin: 228px 334px; animation: wave-hi 2.4s ease-in-out infinite; }
+@keyframes wave-hi { 0%, 55%, 100% { transform: rotate(0deg); } 65% { transform: rotate(-12deg); } 75% { transform: rotate(6deg); } 85% { transform: rotate(-10deg); } }
+.beach__flag { transform-box: view-box; transform-origin: 292px 492px; animation: flag-sway 4s ease-in-out infinite alternate; }
+@keyframes flag-sway { from { transform: rotate(-1.5deg); } to { transform: rotate(2deg); } }
 .beach__board { transform-box: fill-box; transform-origin: 50% 100%; transform: rotate(-4deg); }
 .beach__sold { animation: stamp .6s 1.6s var(--ease) both; transform-box: fill-box; transform-origin: center; }
 @keyframes stamp { from { opacity: 0; scale: 1.8; } to { opacity: 1; scale: 1; } }
