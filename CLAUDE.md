@@ -23,7 +23,9 @@ Live at https://chadmatthewbell90.github.io/chad-bell-real-estate/ (no custom do
 
 - `index.html`: the whole site, in sections: hero, marquee, stats, statement, `#why`, `#marketing`, `#award`, `#process`, `#areas`, `#faq`, `#valuation` (form + contact).
 - `privacy.html` (served at `/privacy`; link to `privacy`, not `privacy.html`), `404.html`.
-- `css/style.css`: design tokens at the top, plus the mobile alignment rules in its header comment. Fonts: Syne (display), Instrument Serif (italic accent words in `<em>`), Inter (body and all numerals; Syne's digits read like letters).
+- `css/style.css`: design tokens at the top, plus the mobile alignment rules in its header comment.
+- **Look: boho coastal town** (owner's direction, 2026-11-24). The Bluff is a beach suburb, so keep it sunny and earthy: cream/sand backgrounds, terracotta (`--clay`) for buttons and accent words, sun mustard, sea-glass, and ocean teal for the dark sections. Motifs: the arched window onto an animated beach scene in the hero, wave dividers (`.wave-top`, painted in the section's own colour), swaying palm-frond shadows, the sunburst award seal, dashed lines, Caveat handwritten notes. Don't drift back to dark/tech styling.
+- Fonts: Fraunces with the SOFT axis (headings; italic for `<em>` accent words), DM Sans (body), Caveat (short handwritten notes and the signature only).
 - `js/main.js`: all motion (word-split hero heading, scroll reveals, scroll-lit statement, count-ups, parallax, magnetic buttons, phone tilt, process line) and the valuation form. Every effect is off under `prefers-reduced-motion`.
 - **All paths are relative** (`css/style.css`, `privacy`, `#valuation`) because the site lives under the `/chad-bell-real-estate/` sub-path. `404.html` is the exception: it uses `<base href="/chad-bell-real-estate/">` because GitHub serves it at any depth.
 - `scripts/deploy-staging.sh` publishes the staging copy. `_config.yml` keeps `scripts/` and this file off the live site.
@@ -53,5 +55,6 @@ None yet: no Google Tag Manager, GA4, cookie banner or booking widget. When trac
 
 ## Gotchas
 
-- The hero heading is split into words by JS. The gradient `<em>` phrase is animated as one unit on purpose: `background-clip: text` doesn't paint into transformed child spans, so splitting inside it makes the words invisible.
+- The hero heading is split into words by JS. The `<em>` phrase (with its hand-drawn squiggle SVG) is animated as one unit on purpose: splitting inside it would break the squiggle and any `background-clip: text` effect.
+- Sections that need horizontal clipping use `overflow-x: clip`, not `overflow: hidden`, so the wave divider above them stays visible.
 - Headless Chrome won't make a window narrower than about 500px. To check the 390px mobile layout, screenshot a wrapper page with the site in a 390px-wide iframe.
