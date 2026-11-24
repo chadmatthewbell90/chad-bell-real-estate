@@ -111,8 +111,8 @@
         </ul>
       </div>
 
-      <div class="hero__visual" aria-hidden="true">
-        <div class="arch" data-tilt>
+      <div class="hero__visual">
+        <div class="arch" data-tilt aria-hidden="true">
           <svg class="beach" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
             <defs>
               <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
@@ -135,16 +135,26 @@
               <path d="M0 410 C 80 396, 160 420, 240 404 S 360 398, 400 406 V 520 H 0 Z" fill="#FBF3E6"/>
               <path d="M0 418 C 80 404, 160 428, 240 412 S 360 406, 400 414 V 520 H 0 Z" fill="#EED7B5"/>
             </g>
-            <g class="beach__umbrella">
-              <path d="M300 470 L 292 400" stroke="#6B4E3D" stroke-width="3" stroke-linecap="round"/>
-              <path d="M250 404 Q 292 360 336 398 Z" fill="#C8714F"/>
-              <path d="M268 401 Q 290 368 292 400 Z M 292 400 Q 300 370 318 400 Z" fill="#FBF3E6"/>
+            <g class="beach__sign" transform="translate(34 0)">
+              <ellipse cx="196" cy="481" rx="34" ry="5" fill="#C9A982" opacity=".7"/>
+              <g class="beach__board">
+                <rect x="193" y="384" width="7" height="98" rx="2" fill="#7A5A44"/>
+                <rect x="148" y="392" width="98" height="56" rx="3" fill="#D9261C"/>
+                <rect x="151.5" y="395.5" width="91" height="49" rx="2" fill="none" stroke="#FBF3E6" stroke-width="1.2" opacity=".85"/>
+                <text x="197" y="425" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="800" font-size="21" letter-spacing="1" fill="#FFFFFF">ACUTTS</text>
+                <text x="197" y="437" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="600" font-size="5.6" letter-spacing="1.6" fill="#FFFFFF">ESTABLISHED 1851</text>
+                <g class="beach__sold"><g transform="rotate(-14 214 392)">
+                  <rect x="186" y="380" width="62" height="19" rx="2" fill="#FBF3E6" stroke="#D9261C" stroke-width="1.5"/>
+                  <text x="217" y="395" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="800" font-size="15" letter-spacing="2" fill="#D9261C">SOLD</text>
+                </g></g>
+              </g>
+              <path d="M178 482 Q196 470 214 482 Z" fill="#E2C79E"/>
             </g>
           </svg>
           <span class="arch__note">sunrise on The Bluff ~</span>
         </div>
 
-        <div class="phone">
+        <div class="phone" aria-hidden="true">
           <div class="phone__screen">
             <div class="phone__notch"></div>
             <div class="reel">
@@ -161,9 +171,15 @@
             </div>
           </div>
         </div>
-        <span class="hero__note">your home, on everyone's feed<svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M56 4 C 40 6, 20 14, 10 32"/><path d="M4 24 L10 33 L19 28"/></svg></span>
+        <span class="hero__note" aria-hidden="true">your home, on everyone's feed<svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M56 4 C 40 6, 20 14, 10 32"/><path d="M4 24 L10 33 L19 28"/></svg></span>
 
-        <div class="seal">
+        <figure class="polaroid">
+          <span class="polaroid__tape" aria-hidden="true"></span>
+          <img src="images/chad-bell.jpg" width="560" height="560" alt="Chad Bell smiling beside an Acutts flag at a show day" decoding="async" fetchpriority="high" />
+          <figcaption>hi, I'm Chad!</figcaption>
+        </figure>
+
+        <div class="seal" aria-hidden="true">
           <svg class="seal__ring" viewBox="0 0 150 150">
             <defs><path id="sealPath" d="M75 75 m-56 0 a56 56 0 1 1 112 0 a56 56 0 1 1 -112 0"/></defs>
             <text textLength="350" lengthAdjust="spacing"><textPath href="#sealPath" textLength="350" lengthAdjust="spacing">Best Listing Agent · Nationwide · Current Holder ·</textPath></text>

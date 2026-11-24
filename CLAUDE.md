@@ -29,7 +29,7 @@ Live at https://www.chadbellrealestate.co.za/ (bare domain redirects to www). Th
 - `js/main.js`: all motion (word-split hero heading, scroll reveals, scroll-lit statement, count-ups, parallax, magnetic buttons, phone tilt, process line) and the valuation form. Every effect is off under `prefers-reduced-motion`.
 - **All paths are relative** (`css/style.css`, `privacy`, `#valuation`) because the site lives under the `/chad-bell-real-estate/` sub-path. `404.html` is the exception: it uses `<base href="/chad-bell-real-estate/">` because GitHub serves it at any depth.
 - `scripts/deploy-staging.sh` publishes the staging copy. `_config.yml` keeps `scripts/` and this file off the live site.
-- Images: `favicon-48.png`, `favicon-192.png`, `apple-touch-icon.png` (CB monogram) and `og-image.jpg` (1200×630 share image) were generated from HTML; there are no photos of Chad yet.
+- Images: `favicon-48.png`, `favicon-192.png`, `apple-touch-icon.png` (CB monogram) and `og-image.jpg` (1200×630 share image) were generated from HTML. `images/chad-bell.jpg` is Chad's photo (his selfie beside an Acutts flag, cropped square, 560px), shown as the taped polaroid in the hero. The hero beach has an Acutts SOLD board in the sand (inline SVG, `.beach__sign`) in place of the old umbrella.
 
 ## Valuation form
 
