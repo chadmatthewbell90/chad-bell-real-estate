@@ -345,6 +345,19 @@ if (form) {
     ];
     const msg = (data.get('message') || '').trim();
     if (msg) lines.push(`Notes: ${msg}`);
+
+    // For Google Tag Manager. Name, phone, address and notes are left out on
+    // purpose: Google's terms forbid sending personal information to Analytics/Ads.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'valuation_form_submit',
+      form_id: 'valuation',
+      contact_method: 'whatsapp',
+      property_type: data.get('type'),
+      selling_timeline: data.get('when'),
+      has_notes: Boolean(msg),
+    });
+
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
   });
 }
