@@ -298,18 +298,26 @@ input, select, textarea { font: inherit; color: inherit; }
 .phone__screen { position: relative; height: 100%; border-radius: 32px; overflow: hidden; background: var(--ocean); color: var(--white); }
 .phone__notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 36%; height: 16px; border-radius: 20px; background: #1A120D; z-index: 5; }
 .reel { position: absolute; inset: 0; }
-/* Aerial of The Bluff coastline, slowly drifting like a reel */
-.reel__bg {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(22,59,63,.5) 0%, rgba(22,59,63,0) 26%, rgba(22,59,63,0) 58%, rgba(22,59,63,.8) 100%), url(../images/bluff-aerial-phone.jpg) center / cover;
-  animation: reelpan 16s ease-in-out infinite alternate;
+/* Instagram-style stories: Chad's photos (images/story-*.jpg), advanced by
+   js/main.js. Each slide slowly pans across its photo while it's showing. */
+.reel__slides { position: absolute; inset: 0; }
+.reel__slides img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .5s ease;
 }
-@keyframes reelpan { from { transform: scale(1.04); } to { transform: scale(1.16) translateY(-3%); } }
+.reel__slides img.is-active { opacity: 1; animation: storypan 5s linear both; }
+.reel__slides img:nth-child(even).is-active { animation-name: storypan-rev; }
+@keyframes storypan     { from { object-position: 0% 50%;   transform: scale(1.06); } to { object-position: 100% 50%; transform: scale(1); } }
+@keyframes storypan-rev { from { object-position: 100% 50%; transform: scale(1); }    to { object-position: 0% 50%;   transform: scale(1.06); } }
+.reel__shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(22,59,63,.5) 0%, rgba(22,59,63,0) 26%, rgba(22,59,63,0) 58%, rgba(22,59,63,.8) 100%);
+}
 .reel__progress { position: absolute; top: 30px; left: 10px; right: 10px; display: flex; gap: 3px; z-index: 4; }
 .reel__progress span { flex: 1; height: 2.5px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; }
 .reel__progress span::after { content: ''; display: block; height: 100%; width: 100%; background: var(--white); transform: scaleX(0); transform-origin: left; }
-.reel__progress span:nth-child(1)::after { transform: scaleX(1); }
-.reel__progress span:nth-child(2)::after { animation: story 5s linear infinite; }
+.reel__progress span.is-done::after { transform: scaleX(1); }
+.reel__progress span.is-active::after { animation: story 5s linear forwards; }
 @keyframes story { to { transform: scaleX(1); } }
 .reel__tag { position: absolute; top: 40px; left: 10px; z-index: 4; display: flex; align-items: center; gap: 6px; font-size: 9.5px; font-weight: 600; }
 .reel__tag i { width: 20px; height: 20px; border-radius: 50%; background: var(--clay); display: grid; place-items: center; font-style: italic; font-family: var(--font-display); font-size: 8.5px; }

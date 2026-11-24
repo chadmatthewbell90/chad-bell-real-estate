@@ -199,6 +199,35 @@ if (ticker && !reducedMotion) {
   }, 1400);
 }
 
+/* ── Hero reel: photos play like Instagram stories (5s each, looping) ── */
+const storySlides = [...document.querySelectorAll('.reel__slides img')];
+const storyBars   = [...document.querySelectorAll('.reel__progress span')];
+if (storySlides.length && !reducedMotion) {
+  const STORY_MS = 5000;
+  let current = 0;
+  const show = i => {
+    storySlides.forEach((img, n) => img.classList.toggle('is-active', n === i));
+    storyBars.forEach((bar, n) => {
+      bar.classList.remove('is-active');
+      bar.classList.toggle('is-done', n < i);
+    });
+    void storyBars[i].offsetWidth; // restart the bar's fill animation
+    storyBars[i].classList.add('is-active');
+  };
+  // Photos 2–6 load after the page has finished loading, so they don't slow it down
+  const loadRest = () => storySlides.forEach(img => { if (img.dataset.src) img.src = img.dataset.src; });
+  if (document.readyState === 'complete') loadRest(); else window.addEventListener('load', loadRest);
+
+  show(0);
+  setInterval(() => {
+    if (document.hidden) return;
+    const next = (current + 1) % storySlides.length;
+    if (!storySlides[next].complete || !storySlides[next].naturalWidth) return; // wait for the photo
+    current = next;
+    show(current);
+  }, STORY_MS);
+}
+
 /* ── Scroll-driven effects (one rAF loop) ── */
 const parallaxEls = [...document.querySelectorAll('[data-parallax-x]')];
 const floatPhones = [...document.querySelectorAll('[data-float]')];
