@@ -2,7 +2,7 @@
 
 Static one-page site for Chad Bell, estate agent at Acutts Bluff (The Bluff, Durban). Its only job is to get **homeowners who want to sell** to contact Chad for a valuation. It is not a listings site: never add property listings, search, or buyer-focused content.
 
-Live at https://chadmatthewbell90.github.io/chad-bell-real-estate/ (no custom domain yet). The people working on it are not developers: explain git, deploys and DNS in plain terms.
+Live at https://www.chadbellrealestate.co.za/ (bare domain redirects to www). The people working on it are not developers: explain git, deploys and DNS in plain terms.
 
 ## Workflow
 
@@ -44,7 +44,7 @@ No server: on submit, `js/main.js` builds a WhatsApp message from the fields and
 ## Domain, hosting and DNS
 
 - **Domain:** chadbellrealestate.co.za, registered and DNS-hosted at **domains.co.za** (nameservers ns1–ns4.tld-ns.*). Chad edits DNS himself in the domains.co.za client area; never ask for or enter his login. No email runs on this domain (Chad's email is @acutts.co.za), so there are no MX records to protect.
-- **Live (planned):** `www.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate`; the bare domain redirects to www. Until the switch, the live site is https://chadmatthewbell90.github.io/chad-bell-real-estate/ and www still shows Chad's old Google Sites page.
+- **Live (planned):** `www.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate`; the bare domain redirects to www. Until the switch, the live site is https://www.chadbellrealestate.co.za/ and www still shows Chad's old Google Sites page.
 - **Staging:** `staging.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate-staging` (custom domain already set there). Published only by `scripts/deploy-staging.sh`, which adds noindex, a "Staging preview" badge and the staging CNAME.
 - **DNS records needed at domains.co.za:** A `@` → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` → `chadmatthewbell90.github.io`; CNAME `staging` → `chadmatthewbell90.github.io`. Remove the old A record 169.239.219.58, the web forwarding on the bare domain, and the www CNAME to ghs.googlehosted.com.
 - **Live switch (after DNS):** the branch `live-domain` holds it: `CNAME` = `www.chadbellrealestate.co.za`; canonical, Open Graph, JSON-LD, `robots.txt` and `sitemap.xml` use `https://www.chadbellrealestate.co.za/`; `404.html` `<base href>` = `/`. Merge and push only with Chad's go-ahead, then tick Enforce HTTPS in both repos once GitHub has issued the certificates.
