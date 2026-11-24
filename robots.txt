@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chadmatthewbell90.github.io/chad-bell-real-estate/sitemap.xml
