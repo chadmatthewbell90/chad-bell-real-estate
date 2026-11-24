@@ -44,10 +44,11 @@ No server: on submit, `js/main.js` builds a WhatsApp message from the fields and
 ## Domain, hosting and DNS
 
 - **Domain:** chadbellrealestate.co.za, registered and DNS-hosted at **domains.co.za** (nameservers ns1–ns4.tld-ns.*). Chad edits DNS himself in the domains.co.za client area; never ask for or enter his login. No email runs on this domain (Chad's email is @acutts.co.za), so there are no MX records to protect.
-- **Live (planned):** `www.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate`; the bare domain redirects to www. Until the switch, the live site is https://www.chadbellrealestate.co.za/ and www still shows Chad's old Google Sites page.
+- **Live:** `www.chadbellrealestate.co.za` (since 2026-11-24), GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate`, HTTPS enforced; the bare domain and the old github.io address redirect to www. The old Google Sites page is retired.
 - **Staging:** `staging.chadbellrealestate.co.za`, GitHub Pages from repo `chadmatthewbell90/chad-bell-real-estate-staging` (custom domain already set there). Published only by `scripts/deploy-staging.sh`, which adds noindex, a "Staging preview" badge and the staging CNAME.
 - **DNS records needed at domains.co.za:** A `@` → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` → `chadmatthewbell90.github.io`; CNAME `staging` → `chadmatthewbell90.github.io`. Remove the old A record 169.239.219.58, the web forwarding on the bare domain, and the www CNAME to ghs.googlehosted.com.
-- **Live switch (after DNS):** the branch `live-domain` holds it: `CNAME` = `www.chadbellrealestate.co.za`; canonical, Open Graph, JSON-LD, `robots.txt` and `sitemap.xml` use `https://www.chadbellrealestate.co.za/`; `404.html` `<base href>` = `/`. Merge and push only with Chad's go-ahead, then tick Enforce HTTPS in both repos once GitHub has issued the certificates.
+- Staging also has HTTPS enforced. If a certificate ever stalls on `none`, clear and re-set the custom domain in that repo's Pages settings (`gh api -X PUT repos/<repo>/pages -f cname=…`), then redeploy.
+- **Owner's guide** (plain-English handover for Chad): https://claude.ai/artifact/JsUzKCeCP8w8TujwuatNCZ. Update it when the workflow, addresses or accounts change.
 
 ## Tracking
 
