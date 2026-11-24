@@ -269,13 +269,6 @@ input, select, textarea { font: inherit; color: inherit; }
   font-family: var(--font-hand); font-size: 26px; color: #8A5A40; opacity: .8;
 }
 /* Acutts SOLD board planted in the sand; the SOLD strip stamps on once */
-/* Chad and the Acutts flag, cut out of his photo, standing in the scene.
-   JPEG + alpha mask keeps it ~120KB instead of a 530KB PNG. */
-.arch__chad {
-  position: absolute; right: -2%; bottom: 0; width: 84%; height: auto; z-index: 1;
-  -webkit-mask: url(../images/chad-bell-cutout-mask.png) center / 100% 100% no-repeat;
-  mask: url(../images/chad-bell-cutout-mask.png) center / 100% 100% no-repeat;
-}
 .beach__board { transform-box: fill-box; transform-origin: 50% 100%; transform: rotate(-4deg); }
 .beach__sold { animation: stamp .6s 1.6s var(--ease) both; transform-box: fill-box; transform-origin: center; }
 @keyframes stamp { from { opacity: 0; scale: 1.8; } to { opacity: 1; scale: 1; } }
