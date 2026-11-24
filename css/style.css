@@ -269,30 +269,17 @@ input, select, textarea { font: inherit; color: inherit; }
   font-family: var(--font-hand); font-size: 26px; color: #8A5A40; opacity: .8;
 }
 /* Acutts SOLD board planted in the sand; the SOLD strip stamps on once */
+/* Chad and the Acutts flag, cut out of his photo, standing in the scene.
+   JPEG + alpha mask keeps it ~120KB instead of a 530KB PNG. */
+.arch__chad {
+  position: absolute; right: -2%; bottom: 0; width: 84%; height: auto; z-index: 1;
+  -webkit-mask: url(../images/chad-bell-cutout-mask.png) center / 100% 100% no-repeat;
+  mask: url(../images/chad-bell-cutout-mask.png) center / 100% 100% no-repeat;
+}
 .beach__board { transform-box: fill-box; transform-origin: 50% 100%; transform: rotate(-4deg); }
 .beach__sold { animation: stamp .6s 1.6s var(--ease) both; transform-box: fill-box; transform-origin: center; }
 @keyframes stamp { from { opacity: 0; scale: 1.8; } to { opacity: 1; scale: 1; } }
 
-/* Polaroid of Chad, taped over the arch's right edge */
-.polaroid {
-  position: absolute; z-index: 5; right: -46px; top: 36%;
-  width: 188px; margin: 0; padding: 10px 10px 0;
-  background: #FFFDF8; border-radius: 3px;
-  box-shadow: 0 18px 38px rgba(60,40,25,.24), 0 2px 6px rgba(60,40,25,.12);
-  transform: rotate(5deg);
-  animation: drift 7s ease-in-out infinite alternate;
-}
-@keyframes drift { from { transform: rotate(5deg); } to { transform: rotate(3deg) translateY(-6px); } }
-.polaroid img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 1px; }
-.polaroid figcaption {
-  font-family: var(--font-hand); font-size: 24px; line-height: 1; color: var(--clay-dark);
-  text-align: center; padding: 9px 0 11px;
-}
-.polaroid__tape {
-  position: absolute; top: -12px; left: 50%; width: 78px; height: 24px;
-  transform: translateX(-50%) rotate(-4deg);
-  background: rgba(246,216,154,.78); box-shadow: 0 1px 2px rgba(60,40,25,.12);
-}
 
 .phone {
   position: relative; width: 250px; aspect-ratio: 9 / 18.5;
@@ -311,9 +298,13 @@ input, select, textarea { font: inherit; color: inherit; }
 .phone__screen { position: relative; height: 100%; border-radius: 32px; overflow: hidden; background: var(--ocean); color: var(--white); }
 .phone__notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 36%; height: 16px; border-radius: 20px; background: #1A120D; z-index: 5; }
 .reel { position: absolute; inset: 0; }
-.reel__bg { position: absolute; inset: 0; background: linear-gradient(170deg, var(--seaglass), var(--sea) 45%, var(--clay) 120%); }
-.reel__house { position: absolute; left: 18%; right: 18%; top: 30%; animation: float 5s ease-in-out infinite alternate; }
-@keyframes float { to { transform: translateY(-8px); } }
+/* Aerial of The Bluff coastline, slowly drifting like a reel */
+.reel__bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(22,59,63,.5) 0%, rgba(22,59,63,0) 26%, rgba(22,59,63,0) 58%, rgba(22,59,63,.8) 100%), url(../images/bluff-aerial-phone.jpg) center / cover;
+  animation: reelpan 16s ease-in-out infinite alternate;
+}
+@keyframes reelpan { from { transform: scale(1.04); } to { transform: scale(1.16) translateY(-3%); } }
 .reel__progress { position: absolute; top: 30px; left: 10px; right: 10px; display: flex; gap: 3px; z-index: 4; }
 .reel__progress span { flex: 1; height: 2.5px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; }
 .reel__progress span::after { content: ''; display: block; height: 100%; width: 100%; background: var(--white); transform: scaleX(0); transform-origin: left; }
@@ -713,9 +704,6 @@ input, select, textarea { font: inherit; color: inherit; }
   .reel__tag { font-size: 8px; top: 34px; }
   .reel__actions { display: none; }
   .hero__note { display: none; }
-  .polaroid { width: 124px; right: -8px; top: 29%; padding: 7px 7px 0; }
-  .polaroid figcaption { font-size: 18px; padding: 6px 0 8px; }
-  .polaroid__tape { width: 56px; height: 18px; top: -9px; }
   .arch__note { font-size: 20px; top: 22%; right: 26%; }
   .seal { width: 112px; height: 112px; right: -6px; top: -6px; }
   .seal::after { inset: 14px; }
