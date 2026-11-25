@@ -790,3 +790,6 @@ input, select, textarea { font: inherit; color: inherit; }
   .cookie-notice { left: 12px; right: 12px; bottom: 12px; max-width: none; }
   .cookie-notice__actions .btn { flex: 1; justify-content: center; }
 }
+
+/* Valuation form spam trap (see index.html): off-screen, not display:none, so bots still fill it */
+.form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

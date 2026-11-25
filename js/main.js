@@ -9,6 +9,9 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer   = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const WHATSAPP      = '27845206603';
+// Google Apps Script web app that adds each valuation lead to Chad's Google Sheet
+// (code in scripts/valuation-leads.gs). Empty = leads go to WhatsApp only.
+const LEADS_URL     = 'https://script.google.com/macros/s/AKfycbxMStY5Ai2RiYjPdQ7KrHJI0iBB8D1PNY-1g_NPVhhP8pC9D9TBFjRpceUHFUhwqig/exec';
 
 /* ── Year ── */
 const yearEl = document.getElementById('year');
@@ -397,6 +400,20 @@ if (form) {
     ];
     const msg = (data.get('message') || '').trim();
     if (msg) lines.push(`Notes: ${msg}`);
+
+    // Save the lead to the Google Sheet. sendBeacon carries on even as WhatsApp
+    // opens, and a plain-text body avoids a CORS preflight Apps Script can't answer.
+    if (LEADS_URL) {
+      const lead = JSON.stringify({
+        name: data.get('name').trim(), phone: data.get('phone').trim(), area: data.get('area').trim(),
+        type: data.get('type'), when: data.get('when'), message: msg,
+        website: data.get('website') || '', source: location.hostname,
+      });
+      const blob = new Blob([lead], { type: 'text/plain;charset=UTF-8' });
+      if (!(navigator.sendBeacon && navigator.sendBeacon(LEADS_URL, blob))) {
+        fetch(LEADS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body: blob }).catch(() => {});
+      }
+    }
 
     // For Google Tag Manager. Name, phone, address and notes are left out on
     // purpose: Google's terms forbid sending personal information to Analytics/Ads.

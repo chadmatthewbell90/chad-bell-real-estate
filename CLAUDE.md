@@ -33,7 +33,12 @@ Live at https://www.chadbellrealestate.co.za/ (bare domain redirects to www). Th
 
 ## Valuation form
 
-No server: on submit, `js/main.js` builds a WhatsApp message from the fields and opens `wa.me/27845206603`. Nothing is stored or sent until the visitor presses send in WhatsApp. The privacy policy describes exactly this; update it if the form ever posts somewhere else (e.g. an email form service).
+No server of our own. On a valid submit, `js/main.js`:
+1. sends the lead as JSON (`navigator.sendBeacon`, text/plain) to a **Google Apps Script web app** (`LEADS_URL`) that appends a row to Chad's Google Sheet "valuation leads" (first tab: Received, Name, Phone, Property area, Property type, Selling timeline, Notes, Sent from). The script's code is `scripts/valuation-leads.gs`; it lives in the Sheet (Extensions → Apps Script) under Chad's Google account, deployed as Web app, execute as Me, access Anyone. If he changes the code he must **Deploy → Manage deployments → edit → New version** (keeps the same URL); a *new* deployment gets a new URL that must go into `LEADS_URL`.
+2. pushes the `valuation_form_submit` dataLayer event (no personal details);
+3. opens `wa.me/27845206603` with the details filled in.
+
+A hidden honeypot field (`website`, `.form__trap`) drops bot submissions. "Sent from" is the page's hostname, so test leads from staging show `staging.chadbellrealestate.co.za`. The privacy policy describes all this (Google Sheet only Chad can open); update it if the Sheet is shared or leads go anywhere else.
 
 ## Contact details (from Chad's public Acutts profile)
 
