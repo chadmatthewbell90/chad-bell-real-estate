@@ -231,27 +231,43 @@ if (storySlides.length && !reducedMotion) {
   }, STORY_MS);
 }
 
-/* ── Marketing phones: Chad's reels play while the section is on screen ── */
+/* ── Marketing phones: Chad's reels play while the section is on screen ──
+   Phones in Low Power / Data Saver mode refuse to autoplay, and with reduced
+   motion we don't autoplay; in both cases a tap (on a phone, or anywhere on the
+   page for blocked autoplay) starts them, since browsers allow play after a tap. */
 const reelVideos = [...document.querySelectorAll('.mini-screen__video')];
-if (reelVideos.length && !reducedMotion && 'IntersectionObserver' in window) {
+const reelBox    = document.querySelector('.marketing__phones');
+if (reelVideos.length && reelBox) {
+  let onScreen = false;
+  const load = v => { if (!v.src) { v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = v.dataset.src; } };
+  const playAll = () => reelVideos.forEach(v => { load(v); v.play().catch(waitForTap); });
+  const pauseAll = () => reelVideos.forEach(v => v.pause());
+  function waitForTap() {
+    ['touchend', 'click'].forEach(type => document.addEventListener(type, () => { if (onScreen) playAll(); }, { once: true, passive: true }));
+  }
+
   reelVideos.forEach(v => {
     const bar = v.parentElement.querySelector('.mini-screen__bar');
     v.addEventListener('timeupdate', () => {
       if (bar && v.duration) bar.style.setProperty('--progress', (v.currentTime / v.duration).toFixed(3));
     });
   });
-  new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      reelVideos.forEach(v => {
-        if (entry.isIntersecting) {
-          if (!v.src) { v.src = v.dataset.src; v.preload = 'auto'; }
-          v.play().catch(() => {}); // autoplay can be refused (e.g. low-power mode); the poster stays
-        } else {
-          v.pause();
-        }
-      });
-    });
-  }, { rootMargin: '200px 0px' }).observe(document.querySelector('.marketing__phones'));
+  // Tapping a phone always plays its reel (or pauses it if it's playing)
+  reelBox.addEventListener('click', e => {
+    const screen = e.target.closest('.phone__screen');
+    const v = screen && screen.querySelector('.mini-screen__video');
+    if (!v) return;
+    load(v);
+    if (v.paused) v.play().catch(() => {}); else v.pause();
+  });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      onScreen = entries[entries.length - 1].isIntersecting;
+      if (onScreen && !reducedMotion) playAll();
+      else if (!onScreen) pauseAll();
+    }, { rootMargin: '200px 0px' }).observe(reelBox);
+  }
 }
 
 /* ── Scroll-driven effects (one rAF loop) ── */
