@@ -794,3 +794,7 @@ input, select, textarea { font: inherit; color: inherit; }
 
 /* Valuation form spam trap (see index.html): off-screen, not display:none, so bots still fill it */
 .form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Valuation buttons link to the form itself (#valuationForm): on phones the form sits
+   below the section's heading and contact details, so linking to the section hid it */
+#valuationForm { scroll-margin-top: calc(var(--nav-h) + 12px); }

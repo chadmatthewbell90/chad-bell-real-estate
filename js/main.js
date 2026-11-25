@@ -52,7 +52,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (!target) return;
     e.preventDefault();
     const navH = nav ? nav.offsetHeight : 0;
-    const top  = anchor.hash === '#home' ? 0 : target.getBoundingClientRect().top + window.scrollY - navH + 1;
+    // A target with its own scroll-margin-top (the valuation form) sets its own gap below the nav
+    const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || (navH - 1);
+    const top  = anchor.hash === '#home' ? 0 : target.getBoundingClientRect().top + window.scrollY - margin;
     window.scrollTo({ top, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
 });
