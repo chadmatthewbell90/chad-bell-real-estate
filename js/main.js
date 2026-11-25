@@ -228,6 +228,29 @@ if (storySlides.length && !reducedMotion) {
   }, STORY_MS);
 }
 
+/* ── Marketing phones: Chad's reels play while the section is on screen ── */
+const reelVideos = [...document.querySelectorAll('.mini-screen__video')];
+if (reelVideos.length && !reducedMotion && 'IntersectionObserver' in window) {
+  reelVideos.forEach(v => {
+    const bar = v.parentElement.querySelector('.mini-screen__bar');
+    v.addEventListener('timeupdate', () => {
+      if (bar && v.duration) bar.style.setProperty('--progress', (v.currentTime / v.duration).toFixed(3));
+    });
+  });
+  new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      reelVideos.forEach(v => {
+        if (entry.isIntersecting) {
+          if (!v.src) { v.src = v.dataset.src; v.preload = 'auto'; }
+          v.play().catch(() => {}); // autoplay can be refused (e.g. low-power mode); the poster stays
+        } else {
+          v.pause();
+        }
+      });
+    });
+  }, { rootMargin: '200px 0px' }).observe(document.querySelector('.marketing__phones'));
+}
+
 /* ── Scroll-driven effects (one rAF loop) ── */
 const parallaxEls = [...document.querySelectorAll('[data-parallax-x]')];
 const floatPhones = [...document.querySelectorAll('[data-float]')];
