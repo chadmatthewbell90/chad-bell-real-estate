@@ -15,7 +15,7 @@ Live at https://www.chadbellrealestate.co.za/ (bare domain redirects to www). Th
 ## Copy voice
 
 - First person, as Chad: "I", "me", "my" (e.g. "I visit your home"). Headings and buttons may address the seller directly ("Get my free valuation"). Use "Chad" in the third person only in the nav label "Why Chad", page titles, meta, alt text and JSON-LD.
-- Audience is serious sellers on The Bluff and surrounding Durban South suburbs. Lead with what sets Chad apart: social media marketing, 16 years' experience, Best Listing Agent nationwide (current holder, most recently 2025), Acutts Bluff management team.
+- Audience is serious sellers on The Bluff and surrounding Durban South suburbs. Lead with what sets Chad apart: social media marketing, 16 years' experience, Best Listing Agent nationwide (current holder, most recently 2025), voted best real estate agent on The Bluff twice by the community (Chad's words, 2026-11-25; no years or poll name given, so don't add any), Acutts Bluff management team.
 - No promises of sale prices or selling times, and no made-up numbers: no invented sales counts, follower counts, reviews or testimonials. Add those only when Chad supplies real ones.
 - South African English (valuation, suburb, transfer, conveyancer, bond).
 
